@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plant Journal — Steven Workman</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="plant-journal.html">Plant Journal</a>
+    </nav>
+
+    <h1>Plant Journal</h1>
+    <p class="lede">
+      Android-first app for houseplants and bonsai: collection, care schedules,
+      a photo journal with AI analysis, and per-plant streaming chat.
+    </p>
+    <p>
+      Personal prototype I use day to day. Not on the Play Store. I built it to
+      learn a full mobile + backend stack outside Salesforce: auth, row-level
+      security, file storage, release variants, and AI behind a server boundary.
+    </p>
+
+    <h2>Stack</h2>
+    <ul>
+      <li>Expo SDK 56, React Native, TypeScript, Expo Router</li>
+      <li>expo-dev-client (custom native builds, not Expo Go)</li>
+      <li>Supabase: Auth, Postgres + RLS, Storage, Edge Functions</li>
+      <li>Gemini for photo analysis and plant chat (server-side only)</li>
+      <li>EAS build variants: development, preview, production</li>
+    </ul>
+
+    <h2>Architecture</h2>
+    <pre>
+App (Expo)
+  → Auth (PKCE, session in SecureStore)
+  → Postgres + RLS
+  → Private Storage (plant and chat photos)
+  → Edge Functions (verify JWT + plant ownership)
+       → Gemini (analyze photo, stream chat)
+    </pre>
+    <p>
+      The mobile app holds only the Supabase URL and anon key. Gemini credentials
+      stay in Edge Function secrets. Chat threads live in Postgres, not a
+      third-party chat SaaS. Photo uploads are downscaled to 1024px on the long
+      edge before Storage.
+    </p>
+
+    <h2>Decisions worth looking at</h2>
+    <ul>
+      <li>
+        <strong>Security boundary.</strong> RLS on every table, storage paths
+        prefixed by user id, Edge Functions re-check plant ownership before
+        calling Gemini. Same idea as Salesforce sharing: the client is not the
+        authority.
+      </li>
+      <li>
+        <strong>AI as a product feature.</strong> Analysis and chat receive a
+        plant context pack (species, care history, garden timezone / hardiness).
+        Chat is scoped to one plant, streams NDJSON from the
+        <code>plant-chat</code> function, and persists the assistant message
+        when the stream ends. Usage is logged per user.
+      </li>
+      <li>
+        <strong>Release variants.</strong> Three package IDs install
+        side-by-side: Dev talks to Metro, Preview is a standalone APK I use as
+        a daily driver, Production is the store-shaped bundle. JS-only changes
+        reload in Dev; native modules and app config require an EAS rebuild.
+      </li>
+    </ul>
+
+    <h2>Status</h2>
+    <p>
+      Core loops are in place: plants, care, photos + analysis, per-plant
+      streaming chat, account deletion. I run Preview on a phone and Dev in
+      parallel for ongoing work.
+    </p>
+    <p>Still open: monthly AI spend caps, broader automated tests, query pagination for large collections. I would not put strangers on this build until quota is enforced.</p>
+
+    <p>Source stays private. Happy to walk through the code in an interview.</p>
+  </body>
+</html>
