@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Apex Test with Logging — Steven Workman</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="plant-journal.html">Plant Journal</a>
+      <a href="apex-test-logging.html">Apex Test Logging</a>
+    </nav>
+
+    <h1>Apex Test with Logging</h1>
+    <p class="lede">
+      VS Code / Cursor extension: CodeLens on Apex test classes to run a method
+      or the whole class with debug logging, then open the downloaded log.
+    </p>
+    <p>
+      Built for Salesforce day-to-day work. The Salesforce CLI can run tests and
+      fetch logs; the gap is the click path. This puts “run with logging” on the
+      test itself and streams output into an <strong>Apex Test Logging</strong>
+      channel, then opens the latest <code>.log</code> in the editor.
+    </p>
+
+    <h2>What you see</h2>
+    <figure>
+      <img
+        src="images/apex-test-logging/runAllTests.png"
+        alt="CodeLens above an Apex test class: Run All Tests with Logging"
+      />
+      <figcaption>Class-level CodeLens</figcaption>
+    </figure>
+    <figure>
+      <img
+        src="images/apex-test-logging/runTest.png"
+        alt="CodeLens above an @isTest method: Run Test with Logging"
+      />
+      <figcaption>Method-level CodeLens</figcaption>
+    </figure>
+
+    <h2>How it works</h2>
+    <pre>
+Apex *Test*.cls
+  → CodeLens / context menu
+  → Extension spawns bash + Salesforce CLI
+       enable FINEST tail → sf apex run test → download log
+  → Output channel + progress notification
+  → File watcher opens logs/*.log
+    </pre>
+    <ul>
+      <li>
+        TypeScript VS Code extension: CodeLens provider on
+        <code>**/*Test*.cls</code>, commands, output channel, child process.
+      </li>
+      <li>
+        Shell scripts wrap <code>sf apex run test</code> and
+        <code>sf apex log get</code> so PATH/auth come from a login shell (nvm,
+        Homebrew, etc.).
+      </li>
+      <li>
+        Install from a VSIX on GitHub Releases (not Marketplace yet).
+      </li>
+    </ul>
+
+    <h2>Status</h2>
+    <p>
+      Personal tool, v0.0.1. I use it in VS Code and Cursor. Source is public.
+    </p>
+    <p>
+      <a href="https://github.com/workmanDX/apex-test-logging"
+        >Source on GitHub</a
+      >
+      ·
+      <a href="https://github.com/workmanDX/apex-test-logging/releases/latest"
+        >Latest VSIX</a
+      >
+    </p>
+  </body>
+</html>

@@ -55,3 +55,19 @@ pre {
   font-size: 0.85rem;
   line-height: 1.4;
 }
+
+figure {
+  margin: 1.25rem 0;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+}
+
+figcaption {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.35rem;
+}
