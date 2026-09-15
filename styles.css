@@ -7,6 +7,15 @@ body {
   color: #1a1a1a;
 }
 
+/* Wider column for IDE screenshots / desktop recordings */
+body.page-wide {
+  max-width: 56rem;
+}
+
+body.page-wide .prose {
+  max-width: 40rem;
+}
+
 nav {
   margin-bottom: 2rem;
   font-size: 0.95rem;
@@ -24,6 +33,12 @@ h2 {
   margin-top: 2rem;
   margin-bottom: 0.5rem;
   font-size: 1.15rem;
+}
+
+h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
 }
 
 p,
@@ -60,10 +75,71 @@ figure {
   margin: 1.25rem 0;
 }
 
-figure img {
+figure img,
+figure video {
   max-width: 100%;
   height: auto;
   border: 1px solid #ddd;
+  display: block;
+  background: #111;
+}
+
+figure.ide {
+  max-width: 36rem;
+}
+
+figure.ide img,
+figure.ide video {
+  width: 100%;
+  background: #1e1e1e;
+}
+
+/* CodeLens crops: large enough to read, not stretched full page */
+figure.ide-crop {
+  max-width: 42rem;
+}
+
+figure.ide-crop img {
+  width: 100%;
+  background: #1e1e1e;
+}
+
+figure.phone {
+  max-width: 18rem;
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.media-grid figure {
+  margin: 0;
+  max-width: none;
+}
+
+.media-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 1.25rem 0;
+}
+
+.media-stack figure {
+  margin: 0;
+}
+
+.media-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.media-row figure.phone {
+  margin: 0;
 }
 
 figcaption {
