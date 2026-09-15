@@ -6,26 +6,51 @@
     <title>Steven Workman</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="page-wide">
     <nav>
       <a href="index.html">Home</a>
       <a href="plant-journal.html">Plant Journal</a>
       <a href="apex-test-logging.html">Apex Test Logging</a>
     </nav>
-    <h1>Steven Workman</h1>
-    <p>
-      Salesforce engineer. Side projects: a houseplant app, and a VS Code
-      extension for Apex test debug logs.
-    </p>
-    <ul>
-      <li>
-        <a href="plant-journal.html">Plant Journal</a> — Android app for plant
-        care, photos, and AI chat
-      </li>
-      <li>
-        <a href="apex-test-logging.html">Apex Test with Logging</a> — VS Code
-        CodeLens to run Apex tests and open the debug log
-      </li>
-    </ul>
+
+    <div class="prose">
+      <h1>Steven Workman</h1>
+      <p class="lede">
+        Senior software engineer with a Salesforce background. Outside work I
+        build personal projects past the CRM: an Android app with AI-backed care
+        scheduling, photo analysis, and per-plant chat, and a VS Code extension
+        that runs Apex tests with debug logging.
+      </p>
+      <p>
+        <a href="https://www.linkedin.com/in/steven-workman-54396791/"
+          >LinkedIn</a
+        >
+      </p>
+    </div>
+
+    <div class="home-previews">
+      <a class="home-preview" href="plant-journal.html">
+        <img
+          class="home-preview-phone"
+          src="images/plant-journal/home.jpg"
+          alt="Plant Journal: My Plants screen with due care queue"
+        />
+        <span class="home-preview-title">Plant Journal</span>
+        <span class="home-preview-desc"
+          >Android app — AI care scheduling, photo analysis, and chat</span
+        >
+      </a>
+      <a class="home-preview" href="apex-test-logging.html">
+        <img
+          class="home-preview-ide"
+          src="images/apex-test-logging/run-test-method.png"
+          alt="Apex Test Logging: Run Test with Logging CodeLens"
+        />
+        <span class="home-preview-title">Apex Test with Logging</span>
+        <span class="home-preview-desc"
+          >VS Code CodeLens to run Apex tests and open the debug log</span
+        >
+      </a>
+    </div>
   </body>
 </html>

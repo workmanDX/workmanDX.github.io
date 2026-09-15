@@ -147,3 +147,53 @@ figcaption {
   color: #555;
   margin-top: 0.35rem;
 }
+
+.home-previews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 2rem;
+  margin: 2rem 0 1rem;
+  align-items: start;
+}
+
+.home-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-preview:hover .home-preview-title {
+  text-decoration: underline;
+  color: #0b57d0;
+}
+
+.home-preview-phone,
+.home-preview-ide {
+  border: 1px solid #ddd;
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #111;
+}
+
+.home-preview-phone {
+  max-width: 16rem;
+}
+
+.home-preview-ide {
+  background: #1e1e1e;
+  margin-top: 0.5rem;
+}
+
+.home-preview-title {
+  font-weight: 600;
+  color: #0b57d0;
+  margin-top: 0.5rem;
+}
+
+.home-preview-desc {
+  font-size: 0.95rem;
+  color: #444;
+}
